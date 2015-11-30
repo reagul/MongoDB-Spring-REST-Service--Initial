@@ -27,7 +27,17 @@ public class ContactResource {
     
     @Autowired
     private ContactDao contactDao;
-
+	/* 
+	
+	 @@@@@@@@@@@@@@@@@@@ LAB students code below this line @@@@@@@@@@@@@@@@@@@@@
+	 
+	*/
+	/*
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Contact>  getAllContact() {
+        return contactDao.findAll();
+    }
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -35,57 +45,11 @@ public class ContactResource {
         logger.debug("getContact, contactId: {}", contactId);
         return contactDao.find(contactId);
     }
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Contact>  getAllContact() {
-        //logger.debug("getContact, contactId: {}", contactId);
-        return contactDao.findAll();
-    }
-    
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response newContact(Contact contact) {
-        logger.debug("newContact, contact: {}", contact);
-        String id = contactDao.create(contact);
-        URI createdUri = URI.create(id);
-        return Response.created(createdUri).build();
-    }
-
-    @PUT
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("{id}/phone/{contactphone}")
-    public Response  updateContactPhone(@PathParam("id") String contactId, @PathParam("contactphone") String newPhonenumber) {
-        contactDao.updatePhone(contactId,newPhonenumber);
-		String JSONResponse = "[{'Status':'PhoneModified'}]";
-	 //return Response.status(200).build();
-	 return Response.ok( JSONResponse, MediaType.APPLICATION_JSON).build();
-    }
-    
-    @PUT
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("{id}/email/{newemailid}")
-    public Response  updateContactEmail(@PathParam("id") String contactId, @PathParam("newemailid") String newEmailID) {
-        contactDao.updateEmail(contactId,newEmailID);
-	String JSONResponse = "[{'Status':'EmailModified'}]";
+	*/
+  /* 
 	
-	// return Response.status(200).build();
-	
-	return Response.ok( JSONResponse, MediaType.APPLICATION_JSON).build();
-    }
-   /** @DELETE
-    @Path("{id}")
-    public void deleteContact(@PathParam("id") String contactId) {
-        logger.debug("deleteContact, contact: {}", contactId);
-        contactDao.delete(contactId);
-    }**/
-
-    @DELETE
-    @Path("{id}")
-    public Response  deleteContact(@PathParam("id") String contactId) {
-        logger.debug("deleteContact, contact: {}", contactId);
-        contactDao.delete(contactId);
-	return Response.status(200).build();
-    }
+	 @@@@@@@@@@@@@@@@@@@ LAB students code above this line @@@@@@@@@@@@@@@@@@@@@
+	 
+	*/
 
 }
