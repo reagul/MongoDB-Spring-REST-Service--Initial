@@ -1,4 +1,4 @@
-## MongoDB Spring REST Service - Template 
+## MongoDB Spring REST Service - Initial template for students teaching
 Author: Ravi Jagannathan  
 
 This is an example of a REST service that loads and stores json data using Mongo DB. 
