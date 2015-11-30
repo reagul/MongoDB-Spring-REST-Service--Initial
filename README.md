@@ -1,11 +1,10 @@
-## MongoDB Spring REST Service - Example 1
-Author: Niclas Tegnér
+## MongoDB Spring REST Service - Template 
+Author: Ravi Jagannathan  
 
 This is an example of a REST service that loads and stores json data using Mongo DB. 
 
 ### Preparations
-Mongo DB must be installed on your local machine. Please [download Mongo DB][1]
-and follow [the install instructions][2]. 
+Mongo DB  and TOMCAT must be installed on your local machine. MongoDB is assumed to run on Localhost.
 
 ### Feature highlights
 - Rest service with CRUD support.
@@ -23,40 +22,39 @@ First of all, you must start Mongo DB on your local machine:
 > cd bin
 > mongod.exe
 ```
-
-Use the REST service to create some support tickets:
-
 ```
-curl -i -X POST -H "Content-Type: application/json" -d '{"subject":"We are out of coffee!!!","description":"Please help now!","createdDateTime":"2014-01-21T09:03:28","priority":9999}' http://localhost:8084/mongodb-spring-example1/supportticket
-curl -i -X POST -H "Content-Type: application/json" -d '{"subject":"BROKEN KEYBOARD","description":"CAPSLOCK IS ALWAYS ON","createdDateTime":"2014-01-21T10:37:49","priority":2}' http://localhost:8084/mongodb-spring-example1/supportticket
-```
-Please pay attention to the responses because the url to get the created support tickets
-will be found in the location part, like this:
-```
-HTTP/1.1 201 Created
-Server: Apache-Coyote/1.1
-Location: http://localhost:8084/mongodb-spring-example1/supportticket/52de563a151caedae9c33a74
-Content-Length: 0
-Date: Tue, 21 Jan 2014 11:12:58 GMT
-```
-
-Get a newly created support ticket (url from the "201 Created" response):
+Make sure the MongoDB has a Database Called EMCRESTDB and collection called "contact". T
+We are assuming that MongoDB service will run on Localhost on port 27017.
+Better to pre-populate the Collection "contact" with dummy data.
+Start with GET and progress from there to POST / PUT / DELETE 
+Here is a sample JSON Data you can insert and GET.
 
 ```
-curl -i -H "Accept: application/json" http://localhost:8084/mongodb-spring-example1/supportticket/52de563a151caedae9c33a74
+```
+{
+    "firstName" : "Handsome",
+    "lastName" : "Paul",
+    "contactphone" : "5088989923",
+    "email" : "paul.haul@emc.com",
+    "city" : "NYCity",
+    "state" : "NY",
+    "phone" : "5088989923"
+}
 ```
 
-Update the priority of a support ticket:
+Use the REST service as a Template for any API. The REST API created here is a Contacts API service.
+Once Installed on TOMCAT / JBOSS / WEBSPHERE it will provide these API out of the BOX.
 
 ```
-curl -i -X PUT http://localhost:8084/mongodb-spring-example1/supportticket/52de563a151caedae9c33a74/priority/5
+GET http://192.168.1.24:8080/ETAPP-REST-1/contacts
 ```
-
-Delete a support ticket:
+GET will get all contacts in the Databse EMCRESTDB and collection contact. 
 
 ```
-curl -i -X DELETE http://localhost:8084/mongodb-spring-example1/supportticket/52de563a151caedae9c33a74
+The API supports PUT / DELETE / POST.
 ```
-
-[1]: http://www.mongodb.org/downloads/
-[2]: http://docs.mongodb.org/manual/installation/
+Modify to suite your API needs.
+```
+- Point to MongoDB running on remote server by mpdifying the Localhost param found in MongoDB config class.
+- Change the model class to suite your own model. Here we are assuming the "contact" model with example JSON agiven above.
+```
